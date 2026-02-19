@@ -4,6 +4,7 @@ import re
 import warnings
 from operator import itemgetter
 from typing import Any
+from typing import Optional
 from typing import TYPE_CHECKING
 
 from pycountry import countries  # type: ignore
@@ -411,7 +412,7 @@ class BIC(common.Base):
         return self._lookup_values("short_name")
 
     @property
-    def country_bank_code(self) -> str | None:
+    def country_bank_code(self) -> Optional[str]:
         """str or None: The country specific bank-code associated with the BIC.
 
         .. deprecated:: 2020.01.0
@@ -422,7 +423,7 @@ class BIC(common.Base):
         return codes[0] if codes else None
 
     @property
-    def bank_name(self) -> str | None:
+    def bank_name(self) -> Optional[str]:
         """str or None: The name of the bank associated with the BIC.
 
         .. deprecated:: 2020.01.0
@@ -433,7 +434,7 @@ class BIC(common.Base):
         return names[0] if names else None
 
     @property
-    def bank_short_name(self) -> str | None:
+    def bank_short_name(self) -> Optional[str]:
         """str or None: The short name of the bank associated with the BIC.
 
         .. deprecated:: 2020.01.0
@@ -473,7 +474,7 @@ class BIC(common.Base):
             return "default"
 
     @property
-    def country(self) -> Data | None:
+    def country(self) -> Optional[Data]:
         """Country: The country this BIC is registered in."""
         return countries.get(alpha_2=self.country_code)
 

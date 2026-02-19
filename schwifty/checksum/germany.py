@@ -10,6 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from itertools import cycle
 from typing import ClassVar
+from typing import Optional
 
 from schwifty import checksum
 from schwifty.domain import Component
@@ -34,7 +35,7 @@ def digit_sum(number: int) -> int:
 
 class WeightedModulus(checksum.Algorithm):
     accepts: ClassVar[list[Component]] = [Component.ACCOUNT_CODE]
-    minuend: ClassVar[int | None] = None
+    minuend: ClassVar[Optional[int]] = None
     modulus: ClassVar[int]
     positions: ClassVar[Positions]
     reverse: ClassVar[bool] = True
@@ -95,12 +96,12 @@ class WeightedModulus(checksum.Algorithm):
 
 class WeightedMod10(WeightedModulus):
     modulus: ClassVar[int] = 10
-    minuend: ClassVar[int | None] = 10
+    minuend: ClassVar[Optional[int]] = 10
 
 
 class WeightedMod11(WeightedModulus):
     modulus: ClassVar[int] = 11
-    minuend: ClassVar[int | None] = 11
+    minuend: ClassVar[Optional[int]] = 11
 
 
 @register
@@ -249,7 +250,7 @@ class Algorithm16(Algorithm06):
 @register
 class Algorithm17(WeightedMod11):
     name = "17"
-    minuend: ClassVar[int | None] = 10
+    minuend: ClassVar[Optional[int]] = 10
     positions = Positions(start=2, end=7, check_digit=8)
     reverse: ClassVar[bool] = False
     weights: ClassVar[list[int]] = [1, 2]

@@ -3,8 +3,8 @@ requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
-name = "schwifty"
-dynamic = ["version"]
+name = "schwifty-md"
+version = "2026.2.19"
 description = "IBAN parsing and validation"
 readme = "README.rst"
 license = "MIT"
@@ -25,6 +25,9 @@ classifiers = [
 requires-python = ">=3.9"
 authors = [
     { name = "Martin Domke", email = "mail@martindomke.net" },
+]
+maintainers = [
+    { name = "Mihai", email = "your-email@example.com" },
 ]
 dependencies = [
     "importlib_resources>=5.10; python_version <= '3.11'",

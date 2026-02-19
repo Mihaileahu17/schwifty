@@ -80,6 +80,11 @@ integrations`_.
 
 Project Information
 -------------------
+# schwifty-md
+
+Fork of [schwifty](https://github.com/mdomke/schwifty) with support for Moldova (MD) IBANs.
+
+Original author: Martin Domke
 
 ``schwifty`` is released under `MIT`_ license and its documentation lives at `Read the Docs`_. The
 code is maintained on `GitHub`_ and packages are distributed on `PyPI`_

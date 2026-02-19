@@ -3,7 +3,9 @@ from __future__ import annotations
 import re
 from random import Random
 from typing import Any
+from typing import Optional
 from typing import TYPE_CHECKING
+from typing import Union
 
 from pycountry import countries  # type: ignore
 from pycountry.db import Data  # type: ignore
@@ -84,7 +86,7 @@ class IBAN(common.Base):
     def from_bban(
         cls,
         country_code: str,
-        bban: str | BBAN,
+        bban: Union[str, BBAN],
         allow_invalid: bool = False,
         validate_bban: bool = False,
     ) -> IBAN:
@@ -163,7 +165,7 @@ class IBAN(common.Base):
     def random(
         cls,
         country_code: str = "",
-        random: Random | None = None,
+        random: Optional[Random] = None,
         use_registry: bool = True,
         **values: str,
     ) -> IBAN:
@@ -288,7 +290,7 @@ class IBAN(common.Base):
             ) from e
 
     @property
-    def bic(self) -> BIC | None:
+    def bic(self) -> Optional[BIC]:
         """BIC or None: The BIC associated to the IBAN's bank-code.
 
         If the bank code is not available in schwifty's registry ``None`` is returned.
@@ -299,7 +301,7 @@ class IBAN(common.Base):
         return self.bban.bic
 
     @property
-    def country(self) -> Data | None:
+    def country(self) -> Optional[Data]:
         """Country: The country this IBAN is registered in."""
         return countries.get(alpha_2=self.country_code)
 
@@ -377,12 +379,12 @@ class IBAN(common.Base):
         return self.bban.currency_code
 
     @property
-    def bank(self) -> dict | None:
+    def bank(self) -> Optional[dict]:
         """dict or None: The information of the bank related to the bank code as part of the BBAN"""
         return self.bban.bank
 
     @property
-    def bank_name(self) -> str | None:
+    def bank_name(self) -> Optional[str]:
         """str or None: The name of the bank associated with the IBAN bank code.
 
         Examples:
@@ -394,7 +396,7 @@ class IBAN(common.Base):
         return self.bban.bank_name
 
     @property
-    def bank_short_name(self) -> str | None:
+    def bank_short_name(self) -> Optional[str]:
         """str or None: The name of the bank associated with the IBAN bank code.
 
         Examples:

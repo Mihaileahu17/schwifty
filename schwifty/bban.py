@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from random import Random
 from typing import Any
 from typing import cast
+from typing import Optional
 
 from rstr import Rstr
 
@@ -161,7 +162,7 @@ class BBAN(common.Base):
     def random(
         cls,
         country_code: str = "",
-        random: Random | None = None,
+        random: Optional[Random] = None,
         use_registry: bool = True,
         **values: str,
     ) -> BBAN:
@@ -263,7 +264,7 @@ class BBAN(common.Base):
         return _get_bban_spec(self.country_code)
 
     @property
-    def bic(self) -> BIC | None:
+    def bic(self) -> Optional[BIC]:
         """BIC or None: The BIC associated to the BBAN's bank-code.
 
         If the bank code is not available in schwifty's registry ``None`` is returned.
@@ -328,7 +329,7 @@ class BBAN(common.Base):
         return self._get_component(Component.CURRENCY_CODE)
 
     @property
-    def bank(self) -> dict | None:
+    def bank(self) -> Optional[dict]:
         """dict | None: The information of bank related to this BBANs bank code."""
         bank_registry = registry.get("bank_code")
         assert isinstance(bank_registry, dict)
@@ -342,7 +343,7 @@ class BBAN(common.Base):
         return bank_entry and bank_entry[0]
 
     @property
-    def bank_name(self) -> str | None:
+    def bank_name(self) -> Optional[str]:
         """str or None: The name of the bank associated with the IBAN bank code.
 
         Examples:
@@ -352,7 +353,7 @@ class BBAN(common.Base):
         return None if self.bank is None else self.bank["name"]
 
     @property
-    def bank_short_name(self) -> str | None:
+    def bank_short_name(self) -> Optional[str]:
         """str or None: The name of the bank associated with the IBAN bank code.
 
         Examples:

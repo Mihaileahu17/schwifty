@@ -3,6 +3,7 @@ from __future__ import annotations
 import re
 from functools import total_ordering
 from typing import Any
+from typing import Optional
 
 
 try:
@@ -31,7 +32,7 @@ class Base(str):
     def __lt__(self, other: Any) -> bool:
         return str(self) < str(other)
 
-    def __deepcopy__(self, memo: dict[str, Any] | None = None) -> Self:
+    def __deepcopy__(self, memo: Optional[dict[str, Any]] = None) -> Self:
         return self.__class__(str(self))
 
     @property
@@ -44,7 +45,7 @@ class Base(str):
         """int: Length of the compact code. It's preferable to call ``len(obj)``"""
         return len(self)
 
-    def _get_slice(self, start: int, end: int | None = None) -> str:
+    def _get_slice(self, start: int, end: Optional[int] = None) -> str:
         if start < len(self) and (end is None or end <= len(self)):
             return self.compact[start:end] if end is not None else self.compact[start:]
         return ""
